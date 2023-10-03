@@ -10,52 +10,44 @@ const parseFile = (filepath) => {
     const content = readFileSync(path.resolve(filepath), 'utf-8');
     return JSON.parse(content);
 }
-// {
-//     - follow: false
-//       host: hexlet.io
-//     - proxy: 123.234.53.22
-//     - timeout: 50
-//     + timeout: 20
-//     + verbose: true
-//   }
-
-// [
-//     {key: 'follow', status: 'deleted'},
-//     {key: 'host', status: 'unchanged'},
-//     {key: 'proxy', status: 'deleted'},
-//     {key: 'timeout', status: 'changed'},
-//     {key: 'verbose', status: 'added'},
-// ]
     
 const buildAst = (obj1, obj2) => {
-    const keys = Object.keys(obj1, obj2);
-    const sharedKeys = _.union(keys);
+    const keys1 = Object.keys(obj1);
+    const keys2 = Object.keys(obj2);
+    const keys = _.union(keys1, keys2).sort();
     const result = [];
-
-    for(const key of sharedKeys) {
-        if (Object.hasOwn(obj1, key) && !Object.hasOwn(obj2, key)) {
-            result.push({key: key, status: 'deleted'}); 
-        }
-        if (!Object.hasOwn(obj1, key) && Object.hasOwn(obj2, key)) {
-            result.push({key: key, status: 'added'}); 
-        }
-        if (Object.hasOwn(obj2, key) && Object.hasOwn(obj2, key)) {
-            if (obj1[key] === obj2[key]) {
-              result.push({key: key, status: 'unchanged'}); 
-            }
-            if (obj1[key] !== obj2[key]) {
-              result.push({key: key, status: 'changed'});
+    
+    for(const key of keys) {
+        if (!Object.hasOwn(obj1, key)) {
+            result.push({key: key, value: obj2[key], status: 'added'}); 
+        } else if (!Object.hasOwn(obj2, key)) {
+            result.push({key: key, value: obj1[key], status: 'deleted'}); 
+        } else if (obj1[key] !== obj2[key]) {
+            result.push({key: key, value: obj2[key], oldValue: obj1[key], status: 'changed'});
+        } else {
+            result.push({key: key, value: obj1[key], status: 'unchanged'}); 
         }
     }
-   }
     return result;
-}
+};
 const genDiff = (filepath1, filepath2) => {
     const obj1 = parseFile(filepath1);
     const obj2 = parseFile(filepath2)
     const tree = buildAst(obj1, obj2);
-   return tree;
+    const nodes = tree.map((node) => {
+        switch(node.status) {
+            case 'deleted': 
+                 return ` - ${node.key}: ${node.value}` ;
+            case 'unchanged':
+                 return `  ${node.key}: ${node.value}`;
+            case 'added':
+                return ` + ${node.key}: ${node.value}`;
+            case 'changed':
+                return ` - ${node.key}: ${node.oldValue}\n + ${node.key}: ${node.value}`
+        }
+    });
+   return `{\n${nodes.join('\n')}\n}`;
 };
 
-console.log(genDiff('file1.json', 'file2.json'))
+//console.log(genDiff('file1.json', 'file2.json'))
 export default genDiff;
