@@ -1,13 +1,14 @@
 import { readFileSync } from 'node:fs';
 import path from 'node:path';
 import _ from 'lodash';    
+import { buildFixturesPath } from './utils';
 
 const parseFile = (filepath) => {
     const extname = path.extname(filepath);
     if(extname !== '.json') {
         return;
     }
-    const content = readFileSync(path.resolve(filepath), 'utf-8');
+    const content = readFileSync(buildFixturesPath(filepath), 'utf-8');
     return JSON.parse(content);
 }
     
@@ -37,13 +38,13 @@ const genDiff = (filepath1, filepath2) => {
     const nodes = tree.map((node) => {
         switch(node.status) {
             case 'deleted': 
-                 return ` - ${node.key}: ${node.value}` ;
+                 return `  - ${node.key}: ${node.value}` ;
             case 'unchanged':
-                 return `  ${node.key}: ${node.value}`;
+                 return `    ${node.key}: ${node.value}`;
             case 'added':
-                return ` + ${node.key}: ${node.value}`;
+                return `  + ${node.key}: ${node.value}`;
             case 'changed':
-                return ` - ${node.key}: ${node.oldValue}\n + ${node.key}: ${node.value}`
+                return `  - ${node.key}: ${node.oldValue}\n  + ${node.key}: ${node.value}`
         }
     });
    return `{\n${nodes.join('\n')}\n}`;
