@@ -2,7 +2,7 @@
 import { readFileSync } from 'node:fs';
 import path from 'node:path';
 import _ from 'lodash';
-import { buildFixturesPath } from './utils';
+import { buildFixturesPath } from './utils.js';
 
 const parseFile = (filepath) => {
   const extname = path.extname(filepath);
@@ -53,5 +53,5 @@ const genDiff = (filepath1, filepath2) => {
   return `{\n${nodes.join('\n')}\n}`;
 };
 
-// console.log(genDiff('file1.json', 'file2.json'))
+// console.log(genDiff('file1.json', 'file2.json'));
 export default genDiff;
