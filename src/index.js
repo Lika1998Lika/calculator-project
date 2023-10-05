@@ -3,14 +3,12 @@ import { readFileSync } from 'node:fs';
 import path from 'node:path';
 import _ from 'lodash';
 import { buildFixturesPath } from './utils.js';
+import { parse } from './parser.js';
 
 const parseFile = (filepath) => {
   const extname = path.extname(filepath);
-  if (extname !== '.json') {
-    return;
-  }
   const content = readFileSync(buildFixturesPath(filepath), 'utf-8');
-  return JSON.parse(content);
+  return parse(content, extname);
 };
 
 const buildAst = (obj1, obj2) => {
@@ -54,4 +52,6 @@ const genDiff = (filepath1, filepath2) => {
 };
 
 // console.log(genDiff('file1.json', 'file2.json'));
+console.log(genDiff('file1.json', 'file2.yml'));
+
 export default genDiff;
