@@ -5,6 +5,10 @@ import { buildFixturesPath } from '../src/utils';
 
 const result = fs.readFileSync(buildFixturesPath('result.txt'), 'utf-8');
 
-test('diff', () => {
+// test('diff plain files', () => {
+//   expect(genDiff('file1.json', 'file2.json')).toBe(result);
+// });
+
+test('diff nested files', () => {
   expect(genDiff('file1.json', 'file2.json')).toBe(result);
 });
