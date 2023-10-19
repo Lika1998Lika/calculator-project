@@ -20,7 +20,7 @@ const makeString = (value, num = 1) => {
   return `{\n${result.join('\n')}\n  ${setIndent(num)}}`;
 };
 
-const stylish = (obj) => {
+const stylish = (tree) => {
   const iter = (node, num = 1) => {
     const {
       type, key, value, meta, children,
@@ -39,7 +39,7 @@ const stylish = (obj) => {
       default: throw new Error(`Unknown type: ${type}`);
     }
   };
-  const result = obj.map((item) => iter(item));
+  const result = tree.map((item) => iter(item));
   return `{\n${result.join('\n')}\n}`;
 };
 
