@@ -1,4 +1,4 @@
-import { test, expect } from 'jest';
+/* eslint-disable no-undef */
 import path from 'path';
 import { readFileSync } from 'fs';
 import genDiff from '../src/index.js';
@@ -6,9 +6,9 @@ import genDiff from '../src/index.js';
 const getFixturePath = (filename) => path.resolve(process.cwd(), '__fixtures__', filename);
 const readFile = (filename) => readFileSync(getFixturePath(filename), 'utf-8');
 
-const stylishResult = readFile('stylish.expect.txt');
-const plainResult = readFile('plain.expect.txt');
-const jsonResult = readFile('json.expect.txt');
+const stylishResult = readFile('stylish.expected.txt');
+const plainResult = readFile('plain.expected.txt');
+const jsonResult = readFile('json.expected.txt');
 
 const file1json = getFixturePath('file1.json');
 const file2json = getFixturePath('file2.json');
