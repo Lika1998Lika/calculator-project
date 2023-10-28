@@ -8,6 +8,8 @@ const format = (data, formatStyle) => {
       return stylish(data);
     case 'plain':
       return plain(data);
+    case 'json':
+      return JSON.stringify(data);
     default:
       console.log('Unknown output format');
   }
