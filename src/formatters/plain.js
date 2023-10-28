@@ -9,7 +9,9 @@ const makeString = (value) => {
 
 const plain = (nodes) => {
   const iter = (node, parent = '') => {
-    const { type, key, value, meta, children } = node;
+    const {
+      type, key, value, meta, children,
+    } = node;
     switch (type) {
       case 'nested':
         return children
@@ -19,11 +21,11 @@ const plain = (nodes) => {
         return `Property '${parent}${key}' was removed`;
       case 'added':
         return `Property '${parent}${key}' was added with value: ${makeString(
-          value
+          value,
         )}`;
       case 'updated':
         return `Property '${parent}${key}' was updated. From ${makeString(
-          meta.oldValue
+          meta.oldValue,
         )} to ${makeString(value)}`;
       case 'unchanged':
         return [];
