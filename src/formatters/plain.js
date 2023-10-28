@@ -9,7 +9,9 @@ const makeString = (value) => {
 
 const plain = (nodes) => {
   const iter = (node, parent = '') => {
-    const { type, key, value, meta, children } = node;
+    const {
+      type, key, value, meta, children,
+    } = node;
     switch (type) {
       case 'nested':
         return children
