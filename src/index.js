@@ -1,13 +1,14 @@
 import { readFileSync } from 'node:fs';
 import path from 'node:path';
-import { buildFixturesPath } from './utils.js';
 import { parse } from './parser.js';
 import { buildTree } from './buildTree.js';
 import format from './formatters/index.js';
 
+const getFullPath = (filepath) => path.resolve(process.cwd(), filepath);
+
 const parseData = (filepath) => {
   const extname = path.extname(filepath);
-  const content = readFileSync(buildFixturesPath(filepath), 'utf-8');
+  const content = readFileSync(getFullPath(filepath), 'utf-8');
   return parse(content, extname);
 };
 

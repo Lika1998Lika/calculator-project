@@ -1,16 +1,40 @@
-import fs from 'node:fs';
-import { describe, expect, test } from '@jest/globals';
-import genDiff from '../src';
-import { buildFixturesPath } from '../src/utils';
+import { test, expect } from 'jest';
+import path from 'path';
+import { readFileSync } from 'fs';
+import genDiff from '../src/index.js';
 
-const result = fs.readFileSync(buildFixturesPath('result.txt'), 'utf-8');
+const getFixturePath = (filename) => path.resolve(process.cwd(), '__fixtures__', filename);
+const readFile = (filename) => readFileSync(getFixturePath(filename), 'utf-8');
 
-describe('diff nested files --stylish', () => {
-  test('json files', () => {
-    expect(genDiff('file1.json', 'file2.json')).toBe(result);
-  });
+const stylishResult = readFile('stylish.expect.txt');
+const plainResult = readFile('plain.expect.txt');
+const jsonResult = readFile('json.expect.txt');
 
-  test('yaml files', () => {
-    expect(genDiff('file1.yml', 'file2.yml'));
-  });
+const file1json = getFixturePath('file1.json');
+const file2json = getFixturePath('file2.json');
+const file1yaml = getFixturePath('file1.yml');
+const file2yml = getFixturePath('file2.yml');
+
+test.each([
+  [file1json, file2json, stylishResult],
+  [file1yaml, file2yml, stylishResult],
+  [file1json, file2yml, stylishResult],
+])('Stylish', (file1, file2, expected) => {
+  expect(genDiff(file1, file2, 'stylish')).toBe(expected);
+});
+
+test.each([
+  [file1json, file2json, plainResult],
+  [file1yaml, file2yml, plainResult],
+  [file1json, file2yml, plainResult],
+])('Plain', (file1, file2, expected) => {
+  expect(genDiff(file1, file2, 'plain')).toBe(expected);
+});
+
+test.each([
+  [file1json, file2json, jsonResult],
+  [file1yaml, file2yml, jsonResult],
+  [file1json, file2yml, jsonResult],
+])('Plain', (file1, file2, expected) => {
+  expect(genDiff(file1, file2, 'json')).toBe(expected);
 });
