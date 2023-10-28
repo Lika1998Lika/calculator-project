@@ -16,7 +16,7 @@
     "*/**.js": [
       "prettier --write",
       "eslint --fix .",
-      "make test"
+      "test"
     ]
   },
   "author": "",
