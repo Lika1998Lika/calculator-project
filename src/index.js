@@ -3,7 +3,8 @@ import path from 'node:path';
 import { parse } from './parser.js';
 import { buildTree } from './buildTree.js';
 import format from './formatters/index.js';
-import { getFullPath } from './utils.js';
+
+export const getFullPath = (filepath) => path.resolve(process.cwd(), filepath);
 
 const parseData = (filepath) => {
   const extname = path.extname(filepath);
