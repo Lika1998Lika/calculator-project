@@ -20,13 +20,9 @@ const plain = (nodes) => {
       case 'removed':
         return `Property '${parent}${key}' was removed`;
       case 'added':
-        return `Property '${parent}${key}' was added with value: ${makeString(
-          value,
-        )}`;
+        return `Property '${parent}${key}' was added with value: ${makeString(value)}`;
       case 'updated':
-        return `Property '${parent}${key}' was updated. From ${makeString(
-          meta.oldValue,
-        )} to ${makeString(value)}`;
+        return `Property '${parent}${key}' was updated. From ${makeString(meta.oldValue)} to ${makeString(value)}`;
       case 'unchanged':
         return [];
       default:
