@@ -1,13 +1,13 @@
 import yaml from 'js-yaml';
 
-export const parse = (rawData, extname) => {
-  switch (extname) {
+export const parse = (rawData, extName) => {
+  switch (extName) {
     case '.json':
       return JSON.parse(rawData);
     case '.yaml':
     case '.yml':
       return yaml.load(rawData);
     default:
-      throw Error('unexpected extname');
+      throw Error(`"${extName}" is unexpected file extension`);
   }
 };

@@ -11,7 +11,7 @@ const format = (data, formatStyle) => {
     case 'json':
       return JSON.stringify(data);
     default:
-      console.log('Unknown output format');
+      throw Error('Unknown output format');
   }
 };
 
