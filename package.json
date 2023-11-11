@@ -2,7 +2,7 @@
   "name": "@hexlet/code",
   "type": "module",
   "version": "1.0.0",
-  "description": "[![Actions Status](https://github.com/Lika1998Lika/frontend-project-46/workflows/hexlet-check/badge.svg)](https://github.com/Lika1998Lika/frontend-project-46/actions)",
+  "description": "Utility that finds differences between config files.",
   "main": "src/index.js",
   "bin": {
     "gendiff": "bin/gendiff.js"
@@ -18,7 +18,7 @@
       "eslint --fix ."
     ]
   },
-  "author": "",
+  "author": "Anzhelika Vanuyto",
   "license": "ISC",
   "dependencies": {
     "commander": "^11.0.0",

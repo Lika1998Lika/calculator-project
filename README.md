@@ -67,9 +67,45 @@ $npm ci
 
 # this command is responsible for linking commands from package.json to "./bin" directory
 $npm link
-
-#run utility
-$ gendiff <filepath1> <filepath2>
 ```
 
-<a href="https://asciinema.org/a/7RceSarq7y2w7P5rVTn4q3kYs" target="_blank"><img src="https://asciinema.org/a/7RceSarq7y2w7P5rVTn4q3kYs.svg" width="250"/></a>
+### See how to install
+
+<a href="https://asciinema.org/a/opMAjsjOoQL6wC5UTFJexl6v7" target="_blank"><img src="https://asciinema.org/a/opMAjsjOoQL6wC5UTFJexl6v7.svg" width="300px"/></a>
+
+## Usage
+
+| Output format | By default | Short options | Full options       |
+| ------------- | ---------- | ------------- | ------------------ |
+| `stylish`     | `true`     | `-f stylish`  | `--format stylish` |
+| `plain`       |            | `-f plain`    | `--format plain`   |
+| `json`        |            | `-f json`     | `--format json`    |
+
+```bash
+# stylish format by default
+$ gendiff -f stylish <filepath1> <filepath2>
+```
+
+```bash
+# plain format
+$ gendiff -f json <filepath1> <filepath2>
+```
+
+```bash
+# json format
+$ gendiff -f stylish <filepath1> <filepath2>
+```
+
+### Demo
+
+#### Stylish format
+
+<a href="https://asciinema.org/a/gZPM8HBKCRriBNSnIl5u6Teqp" target="_blank"><img src="https://asciinema.org/a/gZPM8HBKCRriBNSnIl5u6Teqp.svg" width="300px"/></a>
+
+#### Pain format
+
+<a href="https://asciinema.org/a/As8cwE8Pf3O22SVjL6aXnFPF9" target="_blank"><img src="https://asciinema.org/a/As8cwE8Pf3O22SVjL6aXnFPF9.svg" width="300px"/></a>
+
+#### JSON format
+
+<a href="https://asciinema.org/a/06ER0NuMLWlRJLWprqe1oFTdj" target="_blank"><img src="https://asciinema.org/a/06ER0NuMLWlRJLWprqe1oFTdj.svg" width="300px"/></a>
