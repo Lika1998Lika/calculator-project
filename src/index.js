@@ -8,8 +8,9 @@ export const getFullPath = (filepath) => path.resolve(process.cwd(), filepath);
 
 const parseData = (filepath) => {
   const extname = path.extname(filepath);
+  const transformedExtname = extname.slice(1);
   const content = readFileSync(getFullPath(filepath), 'utf-8');
-  return parse(content, extname);
+  return parse(content, transformedExtname);
 };
 
 const genDiff = (filepath1, filepath2, formatStyle = 'stylish') => {
