@@ -7,7 +7,7 @@ const mknode = (key, value, type, meta = {}) => ({
   meta,
 });
 
-export const buildTree = (obj1, obj2) => {
+const buildTree = (obj1, obj2) => {
   const keys = _.union(_.keys(obj1), _.keys(obj2));
   const sortedKeys = _.sortBy(keys);
   const nodes = sortedKeys.map((key) => {
@@ -27,3 +27,5 @@ export const buildTree = (obj1, obj2) => {
 
   return nodes;
 };
+
+export default buildTree;

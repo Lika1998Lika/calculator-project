@@ -1,7 +1,7 @@
 import { readFileSync } from 'node:fs';
 import path from 'node:path';
-import { parse } from './src/parser.js';
-import { buildTree } from './src/buildTree.js';
+import parse from './src/parser.js';
+import buildTree from './src/buildTree.js';
 import format from './src/formatters/index.js';
 
 export const getFullPath = (filepath) => path.resolve(process.cwd(), filepath);

@@ -1,6 +1,6 @@
 import yaml from 'js-yaml';
 
-export const parse = (rawData, extName) => {
+export default (rawData, extName) => {
   switch (extName) {
     case 'json':
       return JSON.parse(rawData);
